@@ -4,7 +4,7 @@
 
 This project analyzes Google Play Store reviews of major Ethiopian banking applications — **Commercial Bank of Ethiopia (CBE)**, **Bank of Abyssinia (BOA)**, and **Dashen Bank** — to extract actionable insights on user experience, sentiment, and recurring product issues.
 
-The goal is to transform unstructured customer feedback into structured business intelligence that helps improve mobile banking reliability, user satisfaction, and feature prioritization.
+The goal is to transform unstructured customer feedback into structured business intelligence that supports mobile banking reliability improvements, user satisfaction enhancement, and feature prioritization.
 
 ---
 
@@ -50,18 +50,18 @@ The goal is to transform unstructured customer feedback into structured business
 - Minimum 400+ reviews per bank
 
 ### 2. Data Preprocessing
-- Removed duplicates
+- Removed duplicate entries
 - Handled missing values
-- Standardized date formats (YYYY-MM-DD)
+- Standardized date format (YYYY-MM-DD)
 
 ### 3. Sentiment Analysis
 - DistilBERT sentiment classifier
 - Labels: Positive / Negative
-- Confidence scoring added per review
+- Confidence score generated per review
 
 ### 4. Thematic Analysis
 - Rule-based keyword extraction
-- Business-relevant themes:
+- Business-aligned theme mapping:
   - Transaction Issues
   - Authentication Issues
   - App Stability Issues
@@ -71,86 +71,95 @@ The goal is to transform unstructured customer feedback into structured business
   - Positive Feedback
 
 ### 5. Database Engineering (PostgreSQL)
-- Designed relational schema with:
-  - banks table
-  - reviews table
-- Inserted processed dataset using Python (SQLAlchemy)
+- Designed relational schema:
+  - `banks` table
+  - `reviews` table
+- Data inserted using Python (SQLAlchemy pipeline)
 
-### 6. Visualization & Insights
-All visualizations are generated using Matplotlib and Seaborn.
+### 6. Visualization & Insight Generation
+- Matplotlib + Seaborn used for exploratory and comparative analysis
+- Outputs support cross-bank benchmarking and decision-making
 
 ---
 
-##  Task 4: Insights and Recommendations
+#  Task 4: Insights and Recommendations
 
-###  Sentiment Overview
-- Positive sentiment dominates general usability feedback
-- Negative sentiment is mainly driven by transaction and authentication issues
+##  Sentiment Overview (All Banks)
 
-**Key Insight:**  
-Reliability issues outweigh feature-related concerns across all banks.
+- Positive sentiment is dominant in general usability feedback
+- Negative sentiment is concentrated in:
+  - Transaction failures
+  - Authentication (OTP/login) issues
+
+###  Key Insight
+System reliability issues are the primary driver of dissatisfaction across all banks, outweighing UI/UX concerns.
 
 ---
 
 ##  Commercial Bank of Ethiopia (CBE)
 
-###  Drivers
+###  Key Drivers
 - Convenient mobile banking experience
 - General usability satisfaction
 
-###  Pain Points
+###  Key Pain Points
 - Transaction failures and delays
-- Device compatibility issues (Android-specific reports)
+- Device compatibility issues (especially Android/Huawei devices)
 
 ###  Recommendations
-- Improve transaction reliability and error handling
-- Expand device compatibility testing
+- Improve transaction failure handling and retry mechanisms
+- Expand device compatibility testing across Android variants
 
 ---
 
 ##  Bank of Abyssinia (BOA)
 
-###  Drivers
-- Easy-to-use interface
+###  Key Drivers
+- Simple and intuitive interface
 - Positive digital banking experience
 
-###  Pain Points
+###  Key Pain Points
 - App crashes and instability
 - OTP/login authentication failures
 
 ###  Recommendations
-- Strengthen backend stability
-- Improve OTP and authentication reliability
+- Improve backend stability and API reliability
+- Strengthen OTP delivery and authentication fallback mechanisms
 
 ---
 
 ##  Dashen Bank
 
-###  Drivers
-- Simple and intuitive UI
-- Positive usability feedback
+###  Key Drivers
+- Clean and intuitive UI
+- General usability satisfaction
 
-###  Pain Points
-- Login/authentication issues
-- Occasional transaction delays
+###  Key Pain Points
+- Login/authentication inconsistencies
+- Transaction processing delays
 
 ###  Recommendations
-- Improve login system stability
-- Optimize transaction processing speed
+- Stabilize authentication system
+- Optimize transaction processing speed and reliability
 
 ---
 
-##  Cross-Bank Comparison
+##  Cross-Bank Comparative Insights
 
-- **CBE** → Highest transaction failure complaints
-- **BOA** → Highest app instability issues
-- **Dashen** → Strong UI feedback but weaker authentication reliability
+| Bank | Primary Issue | Secondary Issue |
+|------|--------------|----------------|
+| CBE | Transaction failures | Device compatibility |
+| BOA | App instability | Authentication failures |
+| Dashen | Authentication issues | Transaction delays |
 
-**Key Insight:**  
-All banks face major challenges in core banking reliability rather than UI/UX design.
+###  Key Insight
+Across all banks, core system reliability (authentication + transaction processing) is the dominant driver of negative user experience, not UI/UX design.
 
 ---
 
 ##  Visualizations
 
-All plots are generated using:
+Run all plots using:
+
+```bash
+python scripts/task4_visuals.py
